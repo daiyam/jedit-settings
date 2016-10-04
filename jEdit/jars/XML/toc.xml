@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<TOC xmlns="http://www.w3.org/TR/xhtml1/transitional">
+  <ENTRY HREF="#id36052859">
+    <TITLE>XML plugin user's guide</TITLE>
+    <ENTRY HREF="#intro">
+      <TITLE>Introduction</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#insert">
+      <TITLE>The XML insert window</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#edit-tag">
+      <TITLE>The edit tag dialog box</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#misc-commands">
+      <TITLE>Miscellaneous features</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#schemas">
+      <TITLE>Schemas</TITLE>
+      <ENTRY HREF="#built-in-dtds">
+        <TITLE>Built-in DTDs</TITLE>
+      </ENTRY>
+    </ENTRY>
+    <ENTRY HREF="#completion">
+      <TITLE>Tag and entity completion</TITLE>
+      <ENTRY HREF="#builtin-completion-info">
+        <TITLE>Built-in completion information</TITLE>
+      </ENTRY>
+    </ENTRY>
+    <ENTRY HREF="#validation">
+      <TITLE>Validation</TITLE>
+      <ENTRY HREF="#customizing-validation">
+        <TITLE>Customizing validation</TITLE>
+      </ENTRY>
+      <ENTRY HREF="#schema-mapping">
+        <TITLE>Finding Schemas</TITLE>
+        <ENTRY HREF="#disabling-schema-mapping">
+          <TITLE>Disabling the schema-mapping</TITLE>
+        </ENTRY>
+        <ENTRY HREF="#see-schema">
+          <TITLE>Seeing the schema which validated a buffer</TITLE>
+        </ENTRY>
+      </ENTRY>
+    </ENTRY>
+    <ENTRY HREF="#translate">
+      <TITLE>Translating between schemas</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#include">
+      <TITLE>XML Inclusion</TITLE>
+      <ENTRY HREF="#child-documents">
+        <TITLE> Child Documents </TITLE>
+      </ENTRY>
+      <ENTRY HREF="#include-entities">
+        <TITLE>External entities</TITLE>
+      </ENTRY>
+      <ENTRY HREF="#include-xinclude">
+        <TITLE>XInclude</TITLE>
+      </ENTRY>
+    </ENTRY>
+    <ENTRY HREF="#oasis-catalog-format">
+      <TITLE>OASIS OPEN catalog format</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#oasis-xml-catalog-format">
+      <TITLE>OASIS XML catalog format</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#hyperlinks">
+      <TITLE>Hyperlinks support</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#xmlindenter">
+      <TITLE>XML Indenter</TITLE>
+      <ENTRY HREF="#whitespace">
+        <TITLE>Configuring whitespace preservation options</TITLE>
+      </ENTRY>
+    </ENTRY>
+    <ENTRY HREF="#changes">
+      <TITLE>Change log</TITLE>
+    </ENTRY>
+    <ENTRY HREF="#feedback">
+      <TITLE>Feedback</TITLE>
+    </ENTRY>
+  </ENTRY>
+</TOC>

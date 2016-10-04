@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE MODES SYSTEM "catalog.dtd">
+
+<MODES>
+	<MODE NAME="css" FILE="css.xml" FILE_NAME_GLOB="*.{css,ziss,styl}" />
+	<MODE NAME="html" FILE="html.xml" FILE_NAME_GLOB="*.{html,htm,hta}" />
+	<MODE NAME="markdown" FILE="markdown.xml" FILE_NAME_GLOB="*.{markdown,md}" />
+</MODES>

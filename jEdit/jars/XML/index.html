@@ -1,0 +1,489 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>XML plugin user's guide</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.1"><link rel="home" href="#id36052859" title="XML plugin user's guide"><link rel="next" href="#intro" title="Introduction"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" title="XML plugin user's guide"><div class="titlepage"><div><div><h2 class="title"><a name="id36052859"></a>XML plugin user's guide</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Slava</span> <span class="surname">Pestov</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Dale</span> <span class="surname">Anson</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Eric</span> <span class="surname">Le Lay</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Robert</span> <span class="surname">McKinnon</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Martin</span> <span class="surname">Raspe</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Jakub</span> <span class="surname">Roztocil</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Alan</span> <span class="surname">Ezust</span></h3></div></div></div><div><p class="releaseinfo">Version 2.8.3-jedit-4.5</p></div><div><div class="legalnotice" title="Legal Notice"><a name="id36107161"></a><p class="legalnotice-title"><b>Legal Notice</b></p><p>
+   Permission is granted to copy, distribute and/or modify this document
+   under the terms of the GNU Free Documentation License, Version 1.1 or
+   any later version published by the Free Software Foundation; with no
+   "Invariant Sections", "Front-Cover Texts" or
+   "Back-Cover Texts", each as defined in the license. A copy of
+   the license can be found in the file <code class="filename">COPYING.DOC.txt</code>
+   included with jEdit.
+  </p><p>
+   The XML plugin itself is released under the GNU General Public License.
+   A copy of the GPL can be found in the jEdit online help.
+  </p><p>
+  This version of the XML plugin for jEdit combines the <a class="ulink" href="docs/htmlsidekick.html" target="_top">HtmlSideKick</a> plugin and EcmaScript parser by Dale Anson, the <a class="ulink" href="docs/javascript.html" target="_top">JavaScriptSideKick</a> by Martin Raspe, the CSS SideKick by Jakub Roztocil, and the XmlIndenter plugin by Robert McKinnon, providing five distinct Sidekick parsers and four different completion services, as well as an indenting service for the Beauty plugin, <a class="ulink" href="http://iso-relax.sourceforge.net/" target="_top">ISO-RELAX</a> and <a class="ulink" href="http://code.google.com/p/jing-trang/" target="_top">jing-trang</a>, for validation and translation of documents that use Relax-NG schemas.
+ </p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><ul><li><span class="section"><a href="#intro">Introduction</a></span></li><li><span class="section"><a href="#insert">The XML insert window</a></span></li><li><span class="section"><a href="#edit-tag">The edit tag dialog box</a></span></li><li><span class="section"><a href="#misc-commands">Miscellaneous features</a></span></li><li><span class="section"><a href="#schemas">Schemas</a></span><ul><li><span class="section"><a href="#built-in-dtds">Built-in DTDs</a></span></li></ul></li><li><span class="section"><a href="#completion">Tag and entity completion</a></span><ul><li><span class="section"><a href="#builtin-completion-info">Built-in completion information</a></span></li></ul></li><li><span class="section"><a href="#validation">Validation</a></span><ul><li><span class="section"><a href="#customizing-validation">Customizing validation</a></span></li><li><span class="section"><a href="#schema-mapping">Finding Schemas</a></span></li></ul></li><li><span class="section"><a href="#translate">Translating between schemas</a></span></li><li><span class="section"><a href="#include">XML Inclusion</a></span><ul><li><span class="section"><a href="#child-documents"> Child Documents </a></span></li><li><span class="section"><a href="#include-entities">External entities</a></span></li><li><span class="section"><a href="#include-xinclude">XInclude</a></span></li></ul></li><li><span class="section"><a href="#oasis-catalog-format">OASIS OPEN catalog format</a></span></li><li><span class="section"><a href="#oasis-xml-catalog-format">OASIS XML catalog format</a></span></li><li><span class="section"><a href="#hyperlinks">Hyperlinks support</a></span></li><li><span class="section"><a href="#xmlindenter">XML Indenter</a></span><ul><li><span class="section"><a href="#whitespace">Configuring whitespace preservation options</a></span></li></ul></li><li><span class="appendix"><a href="#changes">A. Change log</a></span></li><li><span class="appendix"><a href="#feedback">B. Feedback</a></span></li></ul></div><div class="section" title="Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="intro"></a>Introduction</h2></div></div></div><p>
+  This documentation assumes at least basic knowlege of HTML and XML.
+ </p><p> The XML plugin makes jEdit one of the most advanced free Website editing tools available.
+ It combines parsers for XML, HTML, JSP, Sidekick,  and CSS files. Here are its features: </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>On-the-fly validation of XML files with DTD, XSD, or RNG schemas. </p></li><li class="listitem"><p>Tag, attribute, and entity completion popups for XML, HTML and CSS</p></li><li class="listitem"><p>Display of the element tree in a dockable window, for XML, HTML, JavaScript, JSP, and CSS</p></li><li class="listitem"><p>Matching tag highlighting</p></li><li class="listitem"><p>One click insertion of tags and entities</p></li><li class="listitem"><p>Graphical form to edit tags and attributes</p></li><li class="listitem"><p>With a keystroke, jump to matching tag or bracket</p></li><li class="listitem"><p>And more. </p></li></ul></div><h3><a name="id36107271"></a>XML and SideKick</h3><p>
+ To provide most of its functionality, the XML plugin relies on
+ the SideKick plugin. What this means is that Sidekick must be enabled, and
+ docked (preferably to your right or left) and parsing your current buffer
+ in order for certain operations to succeed.  Select Plugins - SideKick -
+ SideKick, and click on the little arrow, which is the docking menu in the
+ upper left corner, to set its docked position. </p><p> Note: Since the XML plugin provides a separate Sidekick parser for HTML versus XML, and it may be possible to parse some documents with both, you may get different results depending on how 'strict' the HTML/XML syntax is used in the document. </p><h3><a name="id36107286"></a>XML and other plugins</h3><p>The XML plugin can take advantage of other plugins, in addition to the required
+ ones like Sidekick.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>If you want to follow hyperlinks in HTML or XML, you'll have to install the
+ <span class="emphasis"><em>Hyperlinks</em></span> plugin.</p></li><li class="listitem"><p>The XML plugin comes with templates for a few common HTML and XML document types
+ (e.g. HTML 4.01 strict, XSD, XSL).To use them, install the <span class="emphasis"><em>Templates</em></span> plugin
+ and restart jEdit.</p></li></ul></div></div><div class="section" title="The XML insert window"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="insert"></a>The XML insert window</h2></div></div></div><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>XML
+  Insert</strong></span> displays the XML insert window. This window is floating by default, but it can be docked into the view from the dock menu (a little arrow in the upper right corner), or from the <span class="guibutton"><strong>Docking</strong></span> pane of the
+  <span class="guimenuitem"><strong>Global Options</strong></span> dialog box.
+ </p><p>
+  This window lists elements that may be inserted at the caret position,
+  all declared entities, and all IDs (element attributes
+  with a value type of <span class="property">ID</span>).
+ </p><p>
+  Clicking an element in the list with the left mouse button
+  will insert it into the buffer and show
+  the <span class="guimenuitem"><strong>Edit Tag</strong></span> dialog box for specifying attributes.
+  See <a class="xref" href="#edit-tag" title="The edit tag dialog box">the section called &#8220;The edit tag dialog box&#8221;</a> for information about the
+  <span class="guimenuitem"><strong>Edit Tag</strong></span> dialog box. Clicking an element
+  with the right mouse button will insert it in the text area, but the
+  <span class="guimenuitem"><strong>Edit Tag</strong></span> dialog box will not be shown.
+ </p><p>
+  Clicking an entity will insert it into the buffer.
+ </p><p>
+  Clicking an ID with the left mouse button will insert it into the buffer;
+  clicking with the right mouse button will move the caret to the element
+  that declares it.
+ </p><p>
+  If text is selected, each selection is wrapped in a pair of opening and
+  closing tags. This is a very powerful feature; you can select any number
+  of text chunks, and surround them with tags, all sharing a common set of
+  attributes.
+ </p></div><div class="section" title="The edit tag dialog box"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="edit-tag"></a>The edit tag dialog box</h2></div></div></div><p>
+  The <span class="guimenuitem"><strong>Edit Tag</strong></span> dialog box can be opened in any of these ways:
+ </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Invoking
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Edit
+  Tag at Caret</strong></span>.
+  </p></li><li class="listitem"><p>Double-clicking a tag in the text area while holding down
+  <span class="keycap"><strong>Control</strong></span>.</p></li><li class="listitem"><p> Hitting return in the completion dialog, if the option is set from the XML Options. </p></li><li class="listitem"><p> Clicking on an element from the XML Insert dockable. </p></li></ul></div><p>
+  The dialog box lists all declared attributes for the current tag in a
+  table. The columns of the table are as follows:
+ </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p title="Set"><b>Set. </b>A check box that controls
+  if the attribute is specified or not. Required attributes are always
+  specified.</p></li><li class="listitem"><p title="Name"><b>Name. </b>The name of the
+  attribute.</p></li><li class="listitem"><p title="Type"><b>Type. </b>This will either be
+  "text" or "choice". If the attribute is
+  required, "required" will be
+  appended.</p></li><li class="listitem"><p title="Value"><b>Value. </b>For
+  "text" attributes, this is a text field.
+  For "choice" attributes, this is a combo
+  box. Depending on the schema, some attributes might define a default value.</p><p>
+   Note that special characters entered in the text field are
+   automatically converted to entities if necessary.
+  </p></li></ul></div><p>
+  The <span class="guilabel"><strong>Preview</strong></span> text field shows what the tag will look
+  like with all currently-specified attributes. Clicking
+  <span class="guibutton"><strong>OK</strong></span> will insert the tag into the buffer.
+ </p></div><div class="section" title="Miscellaneous features"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="misc-commands"></a>Miscellaneous features</h2></div></div></div><p>
+  If the caret is positioned on a tag, the corresponding opening or closing
+  tag will be highlighted in the text area. You can disable this feature,
+  or change the tag highlight color in the
+  <span class="guibutton"><strong>XML</strong></span>&gt;<span class="guibutton"><strong>Xml</strong></span> pane of the <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guimenuitem"><strong>Plugin Options</strong></span>
+  dialog box.
+ </p><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Go
+  to Matching Tag</strong></span> moves the caret to the corresponding opening or
+  closing tag.
+ </p><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Close
+  Last Open Tag</strong></span> inserts a closing tag for the last opened tag.
+ </p><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Remove
+  All Tags</strong></span> removes all tags from the current buffer, leaving
+  only text.
+ </p><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Split
+  Tag</strong></span> splits the current tag at the cursor, and creates a new tag at the same
+  level. This is useful when editing HTML, DocBook or similar documents, for inserting
+  many <code class="literal">&lt;p&gt;</code> or <code class="literal">&lt;para&gt;</code> tags.
+  This command tries
+  to match the current indenting style.
+ </p><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Characters
+  to Entities</strong></span> converts special characters to entities in the
+  current selection.
+ </p><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Entities
+  to Characters</strong></span> converts entities to characters in the
+  current selection.
+ </p><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Generate
+  DTD</strong></span> generates a DTD from the XML instance document in the
+  current buffer. Generation of XSD and RelaxNG schemata is planned for the future.
+ </p><p>
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Copy XPath
+  </strong></span> inserts in the clipboard an XPath to current element. For instance,
+  if the caret is inside the style element of an HTML page, <span class="guimenuitem"><strong>Copy XPath</strong></span>
+  will copy <code class="code">/html/head[1]/style[1]</code> in the clipboard. This might be useful
+  when writing an XSL template over a complex document.
+  <span class="guimenuitem"><strong>Copy XPath</strong></span> should handle namespaces and prefixes gracefully :
+ </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>namespaces and local-names are used for comparison - not prefixes,
+ 	though prefixes found in the document are retained;
+ 	</p></li><li class="listitem"><p>only the first of 2 prefixes bound to the same namespace in the source
+ 	document will be used in the XPath;
+ 	</p></li><li class="listitem"><p>if the same prefix is bound to different namespaces, the second
+ 	instance of the prefix will get a numbered suffix to distinguish it in the XPath.
+ 	</p></li></ul></div></div><div class="section" title="Schemas"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="schemas"></a>Schemas</h2></div></div></div><p>
+  DTDs or Document Type Definitions, are a common way to specify schemas.
+  While an older standard, are still widely used.
+  Buffers which have an associated DTD are validated for errors, and
+  completion popups are shown for elements, attributes, and entities.
+  DTDs are specified by including markup like the following near the start
+  of an XML file:
+ </p><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+ &lt;!DOCTYPE PUBLIC "<em class="replaceable"><code>public ID</code></em>" "<em class="replaceable"><code>system ID</code></em>"&gt;
+ </pre><p>
+  Or alternatively:
+ </p><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+ &lt;!DOCTYPE SYSTEM "<em class="replaceable"><code>system ID</code></em>"&gt;
+ </pre><p>
+  XSDs, or XML schemas, perform a similar function to DTDs, however they are a newer
+  standard and support some features that DTDs do not, like namespaces.
+  Buffers which have an associated schema are validated for errors, and
+  completion popups are shown for elements and entities.
+ </p><p>
+  Schemas are specified with a
+  <span class="markup">http://www.w3.org/2001/XMLSchema-instance</span> namespace in the document's root element:
+ </p><pre class="programlisting">&lt;personnel
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation='personal.xsd'&gt;</pre><p>
+  Or if the target schema has an associated namespace:
+ </p><pre class="programlisting">&lt;dictionary           xmlns="http://www.xml-cml.org/schema/stmml"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.xml-cml.org/schema/stmml ../schema/stmml.xsd
+          http://www.xml-cml.org/schema/cml2/core ../schema/cmlCore.xsd"&gt;</pre><p>
+  In all cases, the XML parser will first look for the specified system or
+  public ID in the plugin's built-in catalog, along with any
+  catalog files specified in the
+  <span class="guibutton"><strong>XML</strong></span>&gt;<span class="guibutton"><strong>Catalogs</strong></span> pane
+  of the <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guimenuitem"><strong>Plugin Options</strong></span> dialog box. </p><p>
+  Catalog files must either be in OASIS OPEN or XML catalog format. These two formats
+  are documented below.
+ </p><p>
+  If the DTD or XSD cannot be located in the catalogs, the plugin will ask if it should be downloaded and cached for future use in the <code class="filename">dtds</code>
+  subdirectory of the jEdit settings directory.
+ </p><p>
+  The download cache can be cleared using the
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;<span class="guimenuitem"><strong>Clear
+  DTD Cache</strong></span> command.
+ </p><div class="section" title="Built-in DTDs"><div class="titlepage"><div><div><h3 class="title"><a name="built-in-dtds"></a>Built-in DTDs</h3></div></div></div><p>
+   The XML plugin catalogs the following DTDs which are included with jEdit itself, or the XML plugin.
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>DTDs declared by jEdit: <code class="filename">actions.dtd</code>,
+  <code class="filename">catalog.dtd</code>,
+  <code class="filename">dockables.dtd</code>,
+  <code class="filename">perspective.dtd</code>,
+  <code class="filename">plugins.dtd</code>,
+  <code class="filename">recent.dtd</code>,
+  <code class="filename">registers.dtd</code>,
+  <code class="filename">services.dt</code>,
+  <code class="filename">xmode.dtd</code>.</p></li><li class="listitem"><p>A few plugin DTDs: <code class="filename">commando.dtd</code> (Console
+  plugin), <code class="filename">sqlServerType.dtd</code> (SQL plugin).</p></li><li class="listitem"><p>XHTML 1.0 and XHTML 1.1 DTDs, referenced using one of the
+  following public IDs:</p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p><code class="literal">-//W3C//DTD XHTML 1.0 Frameset//EN</code></p></li><li class="listitem"><p><code class="literal">-//W3C//DTD XHTML 1.0 Strict//EN</code></p></li><li class="listitem"><p><code class="literal">-//W3C//DTD XHTML 1.0 Transitional//EN</code></p></li><li class="listitem"><p><code class="literal">-//W3C//DTD XHTML 1.1//EN</code></p></li></ul></div></li><li class="listitem"><p>DocBook 4.4 DTDs, referenced with the
+  <code class="literal">-//OASIS//DTD DocBook XML V4.4//EN</code> public ID.
+  </p></li></ul></div><p> For example, these doctypes are recognized by the XML plugin, and when they are used, tell the XML plugin to load a built-in DTD, and provide you with completion popups for elements and attributes.
+ </p><pre class="programlisting">
+&lt;!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"   "docbookx.dtd"&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11-flat.dtd"&gt;
+ </pre></div></div><div class="section" title="Tag and entity completion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="completion"></a>Tag and entity completion</h2></div></div></div><p>
+  If the less-than symbol ("&lt;") is typed and no other key
+  is pressed within a
+  specified delay (half a second by default), a tag list popup will be
+  shown. Note that only tags which the parent element is
+  allowed to contain are listed. The arrow keys can be used to select a tag;
+  if you start
+  typing a tag name, only tags whose names begin with the already-entered
+  text will be shown.
+ </p><p>
+  Pressing <span class="keycap"><strong>Space</strong></span> or <span class="keycap"><strong>&gt;</strong></span> will insert
+  the currently selected
+  tag into the buffer. Pressing <span class="keycap"><strong>Enter</strong></span> will insert
+  the tag and show the <span class="guimenuitem"><strong>Edit Tag</strong></span> dialog box;
+  see <a class="xref" href="#edit-tag" title="The edit tag dialog box">the section called &#8220;The edit tag dialog box&#8221;</a>.
+ </p><p> Attribute Completion works in a similar manner - when the XML plugin
+ detects that you are inside a tag and about to enter an attribute name, it will
+ provide you with a list of possible attributes or completions of attributes
+ if it can obtain this information from the schema. </p><p>
+  Entity completion works in a similar manner; typing
+  <span class="keycap"><strong>&amp;</strong></span> will show an entity list popup. Pressing
+  <span class="keycap"><strong>Space</strong></span>, <span class="keycap"><strong>Enter</strong></span> or <span class="keycap"><strong>;</strong></span>
+  will insert the currently selected entity into the buffer.
+ </p><p>
+  Typing "&lt;/" will automatically close
+  the last open tag.
+ </p><p>
+  Another convenient feature inserts a
+  closing tag when you finish typing an opening tag. It is disabled by default,
+  but can be activated from the plugin options.
+ </p><p>
+  These features can be enabled, disabled and configured in the
+  <span class="guibutton"><strong>SideKick</strong></span> and
+  <span class="guibutton"><strong>XML</strong></span>&gt;<span class="guibutton"><strong>XML</strong></span> pane of the <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guimenuitem"><strong>Plugin Options</strong></span>
+  dialog box.
+ </p><div class="section" title="Built-in completion information"><div class="titlepage"><div><div><h3 class="title"><a name="builtin-completion-info"></a>Built-in completion information</h3></div></div></div><p>
+   The XML plugin supports element and entity completion for the following file types using completion information built in to the plugin:
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>HTML files </p></li><li class="listitem"><p>XSL stylesheets (xsl) </p></li><li class="listitem"><p>XSD XML schema definitions </p></li><li class="listitem"><p><code class="filename">build.xml</code> - Ant build files </p></li></ul></div></div></div><div class="section" title="Validation"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="validation"></a>Validation</h2></div></div></div><p>
+  XML files are validated against their DTD, XSD or RNG schema. If no schema can be loaded, only minimal error checking will be performed. No validation of any kind is performed for HTML files, but XHTML files can be validated using their regular schema.
+ </p><p>
+  Any errors found while parsing XML are handled by the
+  <span class="application">ErrorList</span> plugin; in other words, they are highlighted
+  in the text area, and shown in the
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>Error
+  List</strong></span>&gt;<span class="guimenuitem"><strong>Error List</strong></span> window. See the
+  documentation for the <span class="application">ErrorList</span> plugin for details.
+ </p><p>
+  DTDs (document type definitions), XSDs (w3c XML Schemas), and Relax-NGs are three different
+  standards for defining XML Schemas, to describe which elements and entities are allowed within a
+  specific context.
+  In order to implement completion or validation, the XML plugin needs to be able to load a schema. A few file types for which no schema is available are supported using built-in completion information included with the plugin.
+ </p><div class="section" title="Customizing validation"><div class="titlepage"><div><div><h3 class="title"><a name="customizing-validation"></a>Customizing validation</h3></div></div></div><p>
+  Validation can be disabled on a global basis in the <span class="guibutton"><strong>XML</strong></span>&gt;<span class="guibutton"><strong>XML</strong></span> pane of the <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guimenuitem"><strong>Plugin Options</strong></span> dialog box. It can also be disabled on a per-buffer basis by inserting the following in the first of last 10 lines of the buffer:
+ </p><pre class="programlisting">:xml.validate=false:</pre><p>
+  Namespaces processing can be disabled on a per-buffer basis by inserting
+  the following in the first or last 10 lines of the buffer:
+ </p><pre class="programlisting">:xml.namespaces.disable=true:</pre><p>Why would you do that ? If you use the XHTML plus Math 1.1 DTD, you will
+  get an error because the DTD uses a prefixed name <code class="code">IS10744:arch</code>
+  somewhere, which is incompatible with namespaces. The typical error message is :
+  </p><pre class="programlisting">A colon is not allowed in the name XXX when namespaces are enabled.</pre><p>
+  DTD Validation can be disabled on a per-buffer basis by inserting
+  the following in the first of last 10 lines of the buffer:
+ </p><pre class="programlisting">:xml.validate.ignore-dtd=true:</pre><p>This way, one can use DTDs for entities and a schema for validation.
+ Here is a sample of what you'd do :
+ </p><pre class="programlisting">
+&lt;!-- :xml.validate.ignore-dtd=true: --&gt;
+&lt;!DOCTYPE article [
+  &lt;!ENTITY % isolat1 PUBLIC "ISO 8879:1986//ENTITIES Added Latin 1//EN//XML" 
+                "http://www.oasis-open.org/docbook/xmlcharent/0.3/iso-lat1.ent" &gt;
+  &lt;!ENTITY % isogrk1 PUBLIC "ISO 8879:1986//ENTITIES Greek Letters//EN//XML"
+                "http://www.oasis-open.org/docbook/xmlcharent/0.3/iso-grk1.ent" &gt;
+  %isolat1;
+  %isogrk1;
+]&gt;
+&lt;article
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xsi:noNamespaceSchemaLocation="http://www.docbook.org/xsd/4.4/docbook.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    id="root-article"&gt;
+&lt;title&gt;Using entities like &amp;ecute; &lt;/title&gt;
+ </pre><p>
+ </p></div><div class="section" title="Finding Schemas"><div class="titlepage"><div><div><h3 class="title"><a name="schema-mapping"></a>Finding Schemas</h3></div></div></div><p>
+  Validation will be performed if it is enabled (see <a class="xref" href="#customizing-validation" title="Customizing validation">the section called &#8220;Customizing validation&#8221;</a>)
+  and if a schema or a DTD can be found.</p><p>
+  While DTDs and XSD schemas are declared in the
+  document (see <a class="xref" href="#schemas" title="Schemas">the section called &#8220;Schemas&#8221;</a>), Relax NG schemas are not declared in the document.
+  Therefore, there must be an external mean of specifying the RNG schema.
+  </p><p>
+    You can do this:
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>on a per-buffer basis by inserting the following in the first
+  or last 10 lines of the buffer:
+ </p><pre class="programlisting">:xml.validation.schema=<em class="replaceable"><code>URI to the schema</code></em>:</pre><p>You can use an absolute or relative URI or even an URI that will be resolved as
+ a system Id by some catalog (e.g. <code class="filename">locate.rng</code>).
+ </p></li><li class="listitem"><p>on a per directory and/or global basis, by using schema mapping rules
+  (the so called <code class="filename">schemas.xml</code>). This is consistent with
+  the <a class="ulink" href="http://www.thaiopensource.com/nxml-mode/" target="_top">nXML</a> mode for
+  Emacs (it's even 100% compatible !). These powerful mapping rules
+  work on filenames, paths, root element, namespace, etc.
+  </p></li></ul></div><p>When the XML plugin parses an XML buffer, it will look for a file named 
+  <code class="filename">schemas.xml</code> in the same directory. Or, if it doesn't exist,
+  for a global
+  file in the settings directory (under <code class="filename"><em class="replaceable"><code>JEDIT_SETTINGS</code></em>/plugins/xml.XmlPlugin/schemas.xml</code>),
+  and finally for the built-in file (<code class="filename">XML.jar!/xml/dtds/schemas.xml</code>).
+  The rules contained in this file are given the public Id, system Id, doctype,
+  prefix, local name, namespace of the parsed document. The first rule to match
+  returns the schema that will be used for validation.
+  </p><p>You can edit manually these <code class="filename">schemas.xml</code> files.
+  There is a built-in rule to find their schema, so XML completion and
+  validation should work. The schema is under <code class="filename">xml/dtds/locate.rng</code>
+  in the XML.jar archive (simply open your mapping document and use 
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;
+  <span class="guimenuitem"><strong>Open Schema</strong></span>).</p><p>There are also three actions associated with schema mapping :</p><p>You can set the type of current buffer to a known type via
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;
+  <span class="guimenuitem"><strong>Set Schema Type...</strong></span>. You will be prompted for a type, like :
+  
+  </p><div class="glosslist"><dl><dt>RNG</dt><dd><p>for Relax NG Schemas</p></dd><dt>LOCATE</dt><dd><p>for schemas.xml</p></dd><dt>NONE</dt><dd><p>for any well formed XML</p></dd></dl></div><p>
+  
+  </p><p>You can also directly point to an XSD or RNG schema via
+  <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;
+  <span class="guimenuitem"><strong>Set Schema...</strong></span>. You will be able to choose
+  a schema file from the VFS browser.
+  </p><div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>It does not work from a remote filesystem yet !</p></div><p>Both of these actions will create a <code class="filename">schemas.xml</code> file
+  alongside the current buffer. If such a file exists already, it is updated.
+  </p><div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>The current implementation will retain any existing rule,
+  but will erase any comment and any formatting in the document, so
+  beware that all commented-out section of the schema-mapping will disappear
+  next time you use <span class="guimenuitem"><strong>Set Schema...</strong></span>.
+  </p></div><div class="section" title="Disabling the schema-mapping"><div class="titlepage"><div><div><h4 class="title"><a name="disabling-schema-mapping"></a>Disabling the schema-mapping</h4></div></div></div><p>If, for some reason, you want to disable this schema-mapping mechanism,
+  you can do it on a global basis by unchecking the
+  <span class="guibutton"><strong>enable schema mapping</strong></span> checkbox,
+  in the <span class="guibutton"><strong>XML</strong></span>&gt;<span class="guibutton"><strong>Xml</strong></span> pane of the <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guimenuitem"><strong>Plugin Options</strong></span>.
+  </p><p>You can also disable schema-mapping on a per-buffer basis (let's say on a file in a read-only directory),
+  by inserting the following in the first or last 10 lines of the buffer:
+ </p><pre class="programlisting">:xml.enable-schema-mapping=false:</pre><p>The XML parser will no more try to find a schema using <code class="filename">schemas.xml</code>.
+ However, it will still pick a schema defined via a buffer-local property in a buffer,
+ or if you set a schema via <span class="guimenuitem"><strong>Set Schema...</strong></span> or <span class="guimenuitem"><strong>Set Schema Type...</strong></span>.
+  </p><p>What will happen if you use <span class="guimenuitem"><strong>Set Schema...</strong></span> 
+  and schema-mapping is disabled is that
+  the chosen schema won't be saved and any existing <code class="filename">schemas.xml</code>
+  in the same directory won't be updated. You will have to select the schema
+  again next time you edit the buffer.
+  </p><p> Conversely, <span class="guimenuitem"><strong>Set Schema Type...</strong></span> will still work.
+  It will even propose you schema types defined in a <code class="filename">schemas.xml</code>
+  in the same directory as the buffer. However, the schema-type won't be saved
+  and the <code class="filename">schemas.xml</code> won't be updated.
+  Also, if you update the definition of the typeId (ie. you change its target to another
+  schema), the schema defined for the buffer won't be updated and you'll have to do
+  <span class="guimenuitem"><strong>Set Schema Type...</strong></span> again.
+  </p></div><div class="section" title="Seeing the schema which validated a buffer"><div class="titlepage"><div><div><h4 class="title"><a name="see-schema"></a>Seeing the schema which validated a buffer</h4></div></div></div><p>Finally, <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;
+  <span class="guimenuitem"><strong>Open Schema</strong></span> will let you see the schema associated
+  to current buffer, regardless of wether it is specified as a buffer-local property,
+  via the menu item, or via a schema-mapping rule.</p></div></div></div><div class="section" title="Translating between schemas"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="translate"></a>Translating between schemas</h2></div></div></div><p>Thanks to Trang's schema translation capabilities, you will be able to translate
+from any of DTD, RNG, RNC, XML instances to DTD, RNG, RNC, XSD.
+</p><p>Trang (<code class="uri">http://www.thaiopensource.com/relaxng/trang.html</code>, James Clark and others) 
+is Copyright © 2002, 2003, 2008 Thai Open Source Software Center Ltd.</p><p>A copy of its user-guide is included <a class="ulink" href="docs/trang-manual.html" target="_top">here</a>.</p><p>You may do a basic conversion of current buffer using the
+<code class="code">xml-translate-to-dtd</code>, <code class="code">xml-translate-to-rnc</code>, <code class="code">xml-translate-to-rng</code>,
+<code class="code">xml-translate-to-xsd</code> actions.</p><p>You may specify advanced options using <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guisubmenu"><strong>XML</strong></span>&gt;
+  <span class="guimenuitem"><strong>Translate Schema using Trang</strong></span>.
+  The meaning of each parameter is described in Trang's user manual (<a class="ulink" href="docs/trang-manual.html" target="_top">docs/trang-manual.html</a>).
+</p><p>The output of Trang is converted to jEdit buffers, so that you may review them before saving.
+Any existing file will be overwritten but you'll get its contents back, using <span class="guimenuitem"><strong>
+undo</strong></span>.</p></div><div class="section" title="XML Inclusion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="include"></a>XML Inclusion</h2></div></div></div><p>It is sometimes necessary to split a long XML document into smaller parts,
+or to assemble parts in different ways. This can be achieved via external entities (a DTD feature)
+or via <a class="ulink" href="http://www.w3.org/TR/xinclude/" target="_top">XInclude</a>.
+</p><div class="section" title=" Child Documents "><div class="titlepage"><div><div><h3 class="title"><a name="child-documents"></a> Child Documents </h3></div></div></div><p>
+  When editing an XML file which is included from another file, it can be desirable for validation to always start at the root file, rather than the one that is currently being edited.
+  For example, you might be writing a user manual using DocBook, with each chapter split into its own XML file. This can be achieved by inserting the following in the first or last 10 lines of each child file:
+ </p><pre class="programlisting">:xml.root=<em class="replaceable"><code>relative or absolute path of root document</code></em></pre><p>
+  Note that even if this property is specified, the <span class="guimenuitem"><strong>Structure Browser</strong></span> window only shows elements defined in the current buffer. However, when validating an included file, validation errors will be reported for all files included from the root file.
+ </p></div><div class="section" title="External entities"><div class="titlepage"><div><div><h3 class="title"><a name="include-entities"></a>External entities</h3></div></div></div><p>External entities were used in the user guide for jEdit 4.4 and earlier (see <a class="xref" href="#include-entities-1">excerpt of users-guide.xml</a>).
+The <code class="code">DOCTYPE</code> declaration lists some entities,
+which are referenced via <code class="code">&amp;your_entity;</code>.
+This is similar to <code class="code">#include</code> directives in C or C++.
+</p><a name="include-entities-1"></a><pre class="programlisting">
+
+&lt;!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd" [
+
+&lt;!ENTITY conventions SYSTEM "conventions.xml"&gt;
+
+]&gt;
+
+&lt;book&gt;
+&lt;title&gt;your title&lt;/title&gt;
+
+&amp;conventions;
+&lt;/book&gt;
+
+</pre><p>The inclusion is performed before DTD validation which allows the ID/IDREF
+validation to succeed : ie. a section declared with <code class="code">id="ID1"</code> in one
+file can be referenced from another included file via <code class="code">&lt;xref linkend="ID1"/&gt;</code>.
+For validation in jEdit, you will also need <a class="xref" href="#child-documents" title=" Child Documents ">the section called &#8220; Child Documents &#8221;</a>.
+</p></div><div class="section" title="XInclude"><div class="titlepage"><div><div><h3 class="title"><a name="include-xinclude"></a>XInclude</h3></div></div></div><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top"> </td><td width="80%" valign="top"><p>XInclude defines a namespace associated with the URI
+<code class="code">http://www.w3.org/2001/XInclude</code>.
+The XInclude namespace contains two elements with the local names <code class="code">include</code> and <code class="code">fallback</code>.
+</p></td><td width="10%" valign="top"> </td></tr><tr><td width="10%" valign="top"> </td><td colspan="2" align="right" valign="top">--<span class="attribution">XML Inclusions (XInclude) Version 1.0 (Second Edition)
+W3C Recommendation 15 November 2006</span></td></tr></table></div><p>The jEdit 4.5 FAQ and users guide both use
+XIncludes to join together child documents into a
+whole. </p><p>The following example shows an inclusion similar to <a class="xref" href="#include-entities-1">excerpt of users-guide.xml</a>.</p><a name="include-xinclude-1"></a><pre class="programlisting">
+
+&lt;book&gt;
+&lt;title&gt;your title&lt;/title&gt;
+&lt;xi:include  href="conventions.xml"
+             xmlns:xi="http://www.w3.org/2001/XInclude" /&gt;
+&lt;/book&gt;
+
+</pre><p>XInclude can be activated on a global basis in the <span class="guibutton"><strong>XML</strong></span>&gt;<span class="guibutton"><strong>XML</strong></span>
+pane of the <span class="guimenu"><strong>Plugins</strong></span>&gt;<span class="guimenuitem"><strong>Plugin Options</strong></span> dialog box.
+It can also be activated on a per-buffer basis by inserting the following in the first of last 10 lines of the buffer:
+</p><pre class="programlisting">:xml.xinclude=true:</pre><p>You can fine-tune the way relative URIs will be interpreted in the included fragment :
+either resolve the URIs based on the URI of the fragment, or based on the URI of the parent
+(see <code class="uri">http://www.w3.org/TR/xinclude/#base</code>). This is controlled globally
+ in the option pane or via the property <code class="code">xml.xinclude.fixup-base-uris</code> on a per-buffer
+ basis.</p><p>See the following example: </p><pre class="programlisting">:xml.xinclude=true:xml.xinclude.fixup-base-uris=true:</pre><p>Note that DTD validation would fail on ID/IDREF attributes (<code class="code">id</code>s
+and <code class="code">linkend</code>s). This is because the document seen by the DTD validator
+is prior to XInclude resolution. You are then forced to use either XML Schemas or
+RelaxNG validation.
+For validation in jEdit, you will also need <a class="xref" href="#child-documents" title=" Child Documents ">the section called &#8220; Child Documents &#8221;</a>.
+</p><p>For more informations regarding XInclude and docbook, you should reed
+Chapter 22 of <span class="emphasis"><em>DocBook XSL: The Complete Guide</em></span> by Bob Stayton :
+<code class="uri">http://docs.huihoo.com/docbook/docbook-xsl-complete-guide-3rd/ModularDoc.html</code>
+</p><p>Xinclude is activated in xsltproc via the <code class="code">--xinclude</code> command-line switch.</p></div></div><div class="section" title="OASIS OPEN catalog format"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="oasis-catalog-format"></a>OASIS OPEN catalog format</h2></div></div></div><p>
+   Each line in an OASIS OPEN catalog file must look like one of the following:
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">-- <em class="replaceable"><code>comment</code></em></code>
+   - comments are ignored.</p></li><li class="listitem"><p><code class="literal">SYSTEM "<em class="replaceable"><code>system ID</code></em>"
+   "<em class="replaceable"><code>new system ID</code></em>"</code> - maps the first system ID
+   to the second.</p></li><li class="listitem"><p><code class="literal">PUBLIC "<em class="replaceable"><code>public ID</code></em>"
+   "<em class="replaceable"><code>new system ID</code></em>"</code> - maps the public ID
+   to the system ID.</p></li></ul></div></div><div class="section" title="OASIS XML catalog format"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="oasis-xml-catalog-format"></a>OASIS XML catalog format</h2></div></div></div><p>
+   Catalog files in the OASIS XML catalog format are themselves XML files, and must have the following <span class="markup">DOCTYPE</span> declaration:
+  </p><pre class="programlisting">&lt;![CDATA[&lt;!DOCTYPE catalog
+  PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN"
+  "oasis-catalog.dtd"&gt;]]&gt;</pre><p>
+   The XML plugin bundles the above DTD so you can use the completion features to construct an OASIS XML catalog.
+  </p></div><div class="section" title="Hyperlinks support"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="hyperlinks"></a>Hyperlinks support</h2></div></div></div><p>If the <span class="emphasis"><em>Hyperlinks</em></span> plugin is
+ installed and active, some attributes will be available for navigation.
+ To show them, simply hold the <span class="keycode">Ctrl</span> key
+ and hover over them with the mouse. A solid blue underline
+ will appear under attribute values recognised as hyperlinks.
+ Then, clicking on the link will open the referenced document
+ in a buffer and in some cases move to the referenced element.</p><p>Hereafter is the list of supported hyperlinks in the <code class="code">XML</code> mode.
+ <code class="code">xml:base</code> attributes are used to resolve relative hyperlinks.</p><p>
+ </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>href attributes in <span class="emphasis"><em>XInclude</em></span> (&lt;xi:include href="..."/&gt;).
+ 	Fragments are not supported: the buffer is opened and that's all.</p></li><li class="listitem"><p>simple <span class="emphasis"><em>XLinks</em></span> (&lt;myelt xlink:href="..."/&gt;).
+      Only simple links are supported and the fragment identifier is ignored: the buffer is opened and that's all.</p></li><li class="listitem"><p><span class="emphasis"><em>IDREF attributes</em></span>, when the buffer has been parsed and the attribute has the
+            IDREF datatype. This includes DocBook 4.x links (&lt;xref linkend="id"/&gt;). IDREFS attributes are also supported.
+            Each idref is highlighted on its own.  Datatype is derived from the RNG, XSD, or DTD grammar used for the document.
+      </p></li><li class="listitem"><p><span class="emphasis"><em>XML Schema</em></span> (XSD) schema location (&lt;myelt xsi:schemaLocation="ns1 url1..."&gt;)
+            and no-namespace schema location (&lt;myelt xsi:noNamespaceSchemaLocation="url"&gt;).
+            Multiple namespace-url couples are supported.</p></li><li class="listitem"><p>attributes with datatype anyURI,
+            e.g. XSD include and import (&lt;xs:include schemaLocation="url"/&gt;).
+             Datatype is derived from the RNG, XSD, or DTD grammar used for the document.</p></li><li class="listitem"><p>DocBook ulink (&lt;ulink url="..."&gt;).
+      This is really the url attribute of an ulink element in no namespace.</p></li></ul></div><p>
+ </p><p>Hereafter is the list of supported hyperlinks in the <code class="code">HTML</code> mode.
+Supported hyperlinks are all attributes with type URI in the HTML 4.01 spec.
+Links to other documents and anchors inside document are supported,
+but fragment identifiers in other documents are not.
+The HTML/HEAD/BASE element is used to resolve URIs, if present.
+ </p><p>
+ </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="code">href</code> attributes in <code class="code">a</code>, <code class="code">area</code>, <code class="code">link</code>
+ 	elements.</p></li><li class="listitem"><p><code class="code">longdesc</code>, <code class="code">usemap</code> attributes of <code class="code">img</code> element.</p></li><li class="listitem"><p><code class="code">cite</code> attribute of <code class="code">q</code>, <code class="code">blockquote</code>,
+      <code class="code">ins</code> and <code class="code">del</code> elements.</p></li><li class="listitem"><p><code class="code">usemap</code> attribute of <code class="code">input</code> and <code class="code">object</code> elements.
+      </p></li><li class="listitem"><p><code class="code">src</code> attribute of <code class="code">script</code> element.</p></li><li class="listitem"><p>Attributes with type <code class="code">anyURI</code> 
+      are recognised as hyperlinks.</p></li><li class="listitem"><p>Attributes with type <code class="code">IDREF</code> and <code class="code">IDREFS</code> work
+      as hyperlinks to the referenced element.</p></li></ul></div><p>
+ </p></div><div class="section" title="XML Indenter"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="xmlindenter"></a>XML Indenter</h2></div></div></div><p>
+      The Xml Indenter plugin allows you to indent the XML contents of the current open buffer.
+      You can invoke the "Indent XML" action via
+      a keyboard shortcut or toolbar icon; this can be configured from
+           "Utilities-&gt;Global Options-&gt;jEdit-&gt;Shortcuts" or
+           "Utilities-&gt;Global Options-&gt;jEdit-&gt;Tool Bar" respectively.
+    </p><p>
+      The indent width amount and whether to use soft (emulated with spaces) tabs
+      can be configured in the buffer options:
+           "Utilities-&gt;Buffer Options".
+    </p><p>
+      The following improvements should eventually be made to the Indent XML feature:
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+          Correctly support different line separator encodings.
+        </p></li></ul></div><p>
+    </p><div class="section" title="Configuring whitespace preservation options"><div class="titlepage"><div><div><h3 class="title"><a name="whitespace"></a>Configuring whitespace preservation options</h3></div></div></div><p>
+      You can configure elements whose enclosing text nodes should have whitespace
+      preserved by going to:
+           "Plugins-&gt;Plugin Options-&gt;XML Indenter".
+    </p><p>
+      On the options pane click the add button and in the dialog enter the qualified name
+      of an element whose whitespace should be preserved.
+    </p><p>
+      A qualified name consists of the element name plus any namespace prefix if there
+      is one. For example the XML Indenter comes preconfigured with whitespace preservation
+      for elements named xsl:text, text and tspan.
+    </p><p>
+      You can remove elements from the list by selecting them
+      and clicking the remove button.
+    </p></div></div><div class="appendix" title="Change log"><div class="titlepage"><div><div><h2 class="title"><a name="changes"></a>A. Change log</h2></div></div></div><p> Click <a class="ulink" href="docs/CHANGES.txt" target="_top">here</a> to see the detailed changelog of the XML plugin. There are also separate changelogs for <a class="ulink" href="docs/CHANGES.xmlindenter.txt" target="_top">XmlIndenter</a> and <a class="ulink" href="docs/CHANGES.javascript.txt" target="_top">JavaScript SideKick</a>, two plugins that were merged into the XML plugin. </p></div><div class="appendix" title="Feedback"><div class="titlepage"><div><div><h2 class="title"><a name="feedback"></a>B. Feedback</h2></div></div></div><p>The preferred way to send bug reports is to use the
+      <a class="ulink" href="http://sourceforge.net/tracker/?atid=100588&amp;group_id=588&amp;func=browse" target="_top">Sourceforge Bug Tracker</a>.
+    </p><p>Feature requests should be posted to the jEdit users mailing-list
+      <code class="email">&lt;<a class="email" href="mailto:jedit-users@lists.sourceforge.net">jedit-users@lists.sourceforge.net</a>&gt;</code>.
+    </p><p>Development questions should be posted to the jEdit development mailing-list
+      <code class="email">&lt;<a class="email" href="mailto:jedit-devel@lists.sourceforge.net">jedit-devel@lists.sourceforge.net</a>&gt;</code>.
+    </p></div></div></body></html>
